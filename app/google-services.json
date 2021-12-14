@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "743377433202",
+    "project_id": "coletordadosopticos",
+    "storage_bucket": "coletordadosopticos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:743377433202:android:2446483d0d827a52f4c8eb",
+        "android_client_info": {
+          "package_name": "br.com.patric.coletordadosopticos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "743377433202-g2gadu8eb7ic0154e1l70cpc74ucn0hd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoeJ50zycw9TUa1-C3DrcNGhuJNiV5T6k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "743377433202-g2gadu8eb7ic0154e1l70cpc74ucn0hd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

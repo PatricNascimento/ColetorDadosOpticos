@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ColetorDadosOpticos</string>
+
+    <string-array name="categorias">
+        <item>Selecione...</item>
+        <item>Nome</item>
+        <item>Empresa</item>
+        <item>Data</item>
+    </string-array>
+
+</resources>
