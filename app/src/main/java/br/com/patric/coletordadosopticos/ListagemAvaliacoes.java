@@ -56,15 +56,13 @@ public class ListagemAvaliacoes extends AppCompatActivity {
 
         lvAvaliacoes = findViewById(R.id.lvAvaliacao);
 
-        ListaDeAvaliacoes = new ArrayList<>();
-        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, ListaDeAvaliacoes);
-        lvAvaliacoes.setAdapter(adapter);
 
         btnNovaAvaliacao = findViewById(R.id.btnNovaAvaliacao);
         btnNovaAvaliacao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), NovaEditarAvaliacao.class);
+                intent.putExtra("acao", "inserir");
                 startActivity(intent);
             }
         });
@@ -92,9 +90,26 @@ public class ListagemAvaliacoes extends AppCompatActivity {
                 Intent intent = new Intent( ListagemAvaliacoes.this, NovaEditarAvaliacao.class);
                 intent.putExtra("acao", "editar");
                 Avaliacao prodSelecionado = ListaDeAvaliacoes.get(position);
-                intent.putExtra("idAvaliacao", prodSelecionado.getId());
-                intent.putExtra("nome", prodSelecionado.getNomePacimente());
-                intent.putExtra("empresa", prodSelecionado.getNomeEmpresa());
+                intent.putExtra("id", prodSelecionado.getId());
+                intent.putExtra("nomePaciente", prodSelecionado.getNomePaciente());
+                intent.putExtra("nomeEmpresa", prodSelecionado.getNomeEmpresa());
+                intent.putExtra("cpfPaciente", prodSelecionado.getCpfPaciente());
+                Double teste = prodSelecionado.getLeituraPertoOdEsferico();
+
+                intent.putExtra("leituraPertoOdEsferico", prodSelecionado.getLeituraPertoOdEsferico());
+                intent.putExtra("leituraPertoOdCilindrico", prodSelecionado.getLeituraPertoOdCilindrico());
+                intent.putExtra("leituraPertoOdEixo", prodSelecionado.getLeituraPertoOdEixo());
+                intent.putExtra("leituraPertoOeEsferico", prodSelecionado.getLeituraPertoOeEsferico());
+                intent.putExtra("leituraPertoOeCilindrico", prodSelecionado.getLeituraPertoOeCilindrico());
+                intent.putExtra("leituraPertoOeEixo", prodSelecionado.getLeituraPertoOdEixo());
+
+                intent.putExtra("leituraLongeOdEsferico", prodSelecionado.getLeituraLongeOdEsferico());
+                intent.putExtra("leituraLongeOdCilindrico", prodSelecionado.getLeituraLongeOdCilindrico());
+                intent.putExtra("leituraLongeOdEixo", prodSelecionado.getLeituraLongeOdEixo());
+                intent.putExtra("leituraLongeOeEsferico", prodSelecionado.getLeituraLongeOeEsferico());
+                intent.putExtra("leituraLongeOeCilindrico", prodSelecionado.getLeituraLongeOeCilindrico());
+                intent.putExtra("leituraLongeOeEixo", prodSelecionado.getLeituraLongeOeEixo());
+
                 startActivity( intent );
             }
         });
@@ -141,8 +156,26 @@ public class ListagemAvaliacoes extends AppCompatActivity {
                 try {
                     Avaliacao avaliacao = new Avaliacao();
                     avaliacao.setId(snapshot.getKey());
-                    avaliacao.setNomePacimente(snapshot.child("nomePacimente").getValue(String.class));
+                    avaliacao.setNomePaciente(snapshot.child("nomePaciente").getValue(String.class));
                     avaliacao.setNomeEmpresa(snapshot.child("nomeEmpresa").getValue(String.class));
+                    avaliacao.setCpfPaciente(snapshot.child("cpfPaciente").getValue(String.class));
+
+                    avaliacao.setLeituraPertoOeEixo(snapshot.child("leituraPertoOeEixo").getValue(Double.class));
+                    avaliacao.setLeituraPertoOeCilindrico(snapshot.child("leituraPertoOeCilindrico").getValue(Double.class));
+                    avaliacao.setLeituraPertoOeEsferico(snapshot.child("leituraPertoOeEsferico").getValue(Double.class));
+                    avaliacao.setLeituraPertoOdEixo(snapshot.child("leituraPertoOdEixo").getValue(Double.class));
+                    avaliacao.setLeituraPertoOdEsferico(snapshot.child("leituraPertoOdEsferico").getValue(Double.class));
+                    avaliacao.setLeituraPertoOdCilindrico(snapshot.child("leituraPertoOdCilindrico").getValue(Double.class));
+
+                    avaliacao.setLeituraLongeOeEixo(snapshot.child("leituraLongeOeEixo").getValue(Double.class));
+                    avaliacao.setLeituraLongeOeCilindrico(snapshot.child("leituraLongeOeCilindrico").getValue(Double.class));
+                    avaliacao.setLeituraLongeOeEsferico(snapshot.child("leituraLongeOeEsferico").getValue(Double.class));
+                    avaliacao.setLeituraLongeOdEixo(snapshot.child("leituraLongeOdEixo").getValue(Double.class));
+                    avaliacao.setLeituraLongeOdEsferico(snapshot.child("leituraLongeOdEsferico").getValue(Double.class));
+                    avaliacao.setLeituraLongeOdCilindrico(snapshot.child("leituraLongeOdCilindrico").getValue(Double.class));
+
+
+
 
                     ListaDeAvaliacoes.add(avaliacao);
 
@@ -158,7 +191,7 @@ public class ListagemAvaliacoes extends AppCompatActivity {
 
                 for (Avaliacao avaliacao : ListaDeAvaliacoes) {
 
-                    avaliacao.setNomePacimente(snapshot.child("nomePacimente").getValue(String.class));
+                    avaliacao.setNomePaciente(snapshot.child("nomePacimente").getValue(String.class));
                     avaliacao.setNomeEmpresa(snapshot.child("nomeEmpresa").getValue(String.class));
 
                     adapter.notifyDataSetChanged();
@@ -202,7 +235,7 @@ public class ListagemAvaliacoes extends AppCompatActivity {
         AlertDialog.Builder alerta = new AlertDialog.Builder(this);
         alerta.setTitle("Excluir");
         alerta.setIcon(android.R.drawable.ic_delete);
-        alerta.setMessage("Confirma a exclusão do " + prodSelecionado.getNomePacimente() + "?");
+        alerta.setMessage("Confirma a exclusão do " + prodSelecionado.getNomePaciente() + "?");
 
         alerta.setNeutralButton("Cancelar", null);
         alerta.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
@@ -224,7 +257,7 @@ public class ListagemAvaliacoes extends AppCompatActivity {
     private void carregarListaAvaliacao() {
 
         if (ListaDeAvaliacoes.size() == 0) {
-            Avaliacao fake = new Avaliacao("Lista Vazia", "", "", "");
+            Avaliacao fake = new Avaliacao("", "Lista Vazia","","",0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0);
             ListaDeAvaliacoes.add(fake);
             lvAvaliacoes.setEnabled(false);
         } else {
